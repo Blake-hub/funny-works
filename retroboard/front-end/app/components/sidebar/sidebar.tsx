@@ -1,0 +1,8 @@
+import './styles.css'
+export default function Sidebar() {
+  return (
+    <div className="sidebar">
+      This is a sidebar.
+    </div>
+  )
+}

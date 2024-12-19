@@ -1,0 +1,28 @@
+/* styles/globals.css */
+html {
+  font-size: 16px;  /* 1rem = 16px */
+}
+  
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin-top: 80px;
+  margin-left: 192px;
+  /* margin-left: 12rem; */
+  /* background-color: blueviolet; */
+}
+  
+@media (max-width: 600px) {
+  html {
+    font-size: 8px;  /* On small screens, 1rem = 8px */
+  }
+  body {
+    margin-left: 0;
+  }
+}
+
+:root {
+  --primary-background-color: #fff;
+  --primary-text-color: rgb(0, 0, 0, 0.87);
+  --primary-border-color: rgb(0, 0, 0, 0.12);
+}
