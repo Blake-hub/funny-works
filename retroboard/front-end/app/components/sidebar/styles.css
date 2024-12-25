@@ -16,23 +16,25 @@
     border-color: var(--primary-border-color);
     border-style: solid;
 }
-.sidebar-link {
-    color: white;
-    text-decoration: none;
-    padding: 0.1rem;
-    display: block;
+.sidebar-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  .MuiList-root {
+    margin: 4px;
+    width: 100%;
   }
-   
-  .sidebar-link:hover {
-    background-color: #555;
+  .MuiButtonBase-root {
+    border-radius: 6px;
   }
-   
-  .active {
-    background-color: #007bff;
-  }
+}
+.sidebar-header{
+  display: flex;
+  justify-content:flex-start;
+}
 
-  @media (max-width: 600px) {
-    .sidebar {
-      width: 0rem;
-    }
+@media (max-width: 600px) {
+  .sidebar {
+    width: 0rem;
   }
+}

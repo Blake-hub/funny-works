@@ -1,0 +1,11 @@
+.column {
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 100%;
+    /* border: 1px solid black; */
+    border: 1px solid var(--primary-border-color);
+    border-radius: 6px;
+    background-color: var( --secound-background-color);
+}
