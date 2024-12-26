@@ -10,8 +10,9 @@ type CardProps = {
     name: string;
     role: string;
     order: number;
+    itemlocation: [number, number];
 }
-export default function Card({userId, name, role, order} : CardProps) {
+export default function Card({userId, name, role, order, itemlocation=[0,0]} : CardProps) {
 
     const ref = useRef<HTMLDivElement>(null);
     const [dragging, setDragging] = useState<boolean>(false); // recording if the card is being dragged, than fade the card whlie dragging.
@@ -24,7 +25,7 @@ export default function Card({userId, name, role, order} : CardProps) {
             element: el,
             onDragStart: () => setDragging(true), 
             onDrop: () => setDragging(false), 
-            getInitialData: () => ({ cardId: userId, order: order }),
+            getInitialData: () => ({ cardId: userId, order: order, itemlocation}),
         });
     }, []);
     return <div className="card" ref={ref} style={dragging ? { opacity: 0.5 } : {}}>{name}:{role}</div>;

@@ -5,11 +5,13 @@ import './styles.css'
 import invariant from 'tiny-invariant';
 import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 
+type Coord = [number, number];
 interface Item {
     userId: string;
     name: string;
     role: string;
     order: number;
+    itemlocation: [number, number];
 }
 type ColumnProps = {
     columnId: number;
@@ -46,6 +48,13 @@ export default function Column({columnId, title, items}: ColumnProps) {
     const isDark = columnId % 2 === 1? true : false;
     return <div key={columnId+10} className="column" style={{ backgroundColor: getColor(isDraggedOver, isDark) }} ref={ref}>
         {title}
-        {items.sort((it1, it2)=> it1.order - it2.order).map((item)=><Card key={item.userId} userId={item.userId} name={item.name} role={item.role} order={item.order}/>)}
+        {items.sort((it1, it2)=> it1.order - it2.order).map((item)=>
+            <Card key={item.userId} 
+                  userId={item.userId} 
+                  name={item.name} 
+                  role={item.role} 
+                  order={item.order}
+                  itemlocation={item.itemlocation} />
+        )}
         </div>;
 }
