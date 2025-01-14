@@ -25,7 +25,7 @@ export default function Card({userId, name, role, order, itemlocation=[0,0]} : C
             element: el,
             onDragStart: () => setDragging(true), 
             onDrop: () => setDragging(false), 
-            getInitialData: () => ({ cardId: userId, order: order, itemlocation}),
+            getInitialData: () => ({ cardId: userId, order: order, itemlocation, dragType: 'card' }),
         });
     }, []);
     return <div className="card" ref={ref} style={dragging ? { opacity: 0.5 } : {}}>{name}:{role}</div>;

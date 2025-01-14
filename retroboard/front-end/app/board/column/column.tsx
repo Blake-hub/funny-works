@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import Card from '../cards/card';
 import './styles.css'
 import invariant from 'tiny-invariant';
-import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import { dropTargetForElements,draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
+import { Opacity } from '@mui/icons-material';
 
 type Coord = [number, number];
 interface Item {
@@ -27,26 +29,34 @@ function getColor(isDraggedOver: boolean, isDark: boolean): string {
 	return isDark ? 'lightgrey' : 'white';
 }
 
-export default function Column({columnId, title, items}: ColumnProps) {
+export default function Column({columnId, title, items, order}: ColumnProps) {
 
     const ref = useRef(null);
 	const [isDraggedOver, setIsDraggedOver] = useState(false);
-
+    const [columndragging, setColumndragging] = useState(false);
 
 	useEffect(() => {
 		const el = ref.current;
 		invariant(el);
 
-		return dropTargetForElements({
-			element: el,
-            getData: () => ({ columnId }),
-			onDragEnter: () => setIsDraggedOver(true),
-			onDragLeave: () => setIsDraggedOver(false),
-			onDrop: () => setIsDraggedOver(false),
-		});
+		return combine(
+            dropTargetForElements({
+                element: el,
+                getData: () => ({ columnId }),
+                onDragEnter: () => setIsDraggedOver(true),
+                onDragLeave: () => setIsDraggedOver(false),
+                onDrop: () => setIsDraggedOver(false),
+		    }),
+            draggable({
+                element: el,
+                onDragStart: () => setColumndragging(true), 
+                onDrop: () => setColumndragging(false), 
+                getInitialData: () => ({columnId, dragType: 'column' }),
+            })
+         );
 	}, []);
-    const isDark = columnId % 2 === 1? true : false;
-    return <div key={columnId+10} className="column" style={{ backgroundColor: getColor(isDraggedOver, isDark) }} ref={ref}>
+    const isDark = order % 2 === 1? true : false;
+    return <div key={columnId+10} className="column" style={{ backgroundColor: getColor(isDraggedOver, isDark), opacity: columndragging ? 0.5 : 1 }} ref={ref}>
         {title}
         {items.sort((it1, it2)=> it1.order - it2.order).map((item)=>
             <Card key={item.userId} 
