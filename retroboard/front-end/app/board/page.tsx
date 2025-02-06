@@ -27,7 +27,7 @@ export default function Page() {
                     })
                     });
             }
-            if (targetItem !== null) {
+            if (targetItem) {
                 newData[colIndex].items.push(targetItem);
             }
             setData(newData);
@@ -63,7 +63,7 @@ export default function Page() {
                     const destinationLocation = destination.data;
                     const sourceLocation = source.data;
                     console.log("Destination data is ->",destinationLocation, "Source data is ->",sourceLocation);
-                    movecard(destinationLocation.columnId as number, sourceLocation.cardId as string, sourceLocation.dragType as string, sourceLocation.columnId as number);
+                    movecard(destinationLocation.colid as number, sourceLocation.cardId as string, sourceLocation.dragType as string, sourceLocation.columnId as number);
                     return;
                 }
             }),

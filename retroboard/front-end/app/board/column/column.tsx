@@ -5,7 +5,6 @@ import './styles.css'
 import invariant from 'tiny-invariant';
 import { dropTargetForElements,draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
-import { Opacity } from '@mui/icons-material';
 
 type Coord = [number, number];
 interface Item {
@@ -42,7 +41,7 @@ export default function Column({columnId, title, items, order}: ColumnProps) {
 		return combine(
             dropTargetForElements({
                 element: el,
-                getData: () => ({ columnId }),
+                getData: () => ({ colid:columnId }),
                 onDragEnter: () => setIsDraggedOver(true),
                 onDragLeave: () => setIsDraggedOver(false),
                 onDrop: () => setIsDraggedOver(false),
@@ -64,7 +63,8 @@ export default function Column({columnId, title, items, order}: ColumnProps) {
                   name={item.name} 
                   role={item.role} 
                   order={item.order}
-                  itemlocation={item.itemlocation} />
+                  itemlocation={item.itemlocation} 
+                  columnId={columnId} />
         )}
         </div>;
 }
